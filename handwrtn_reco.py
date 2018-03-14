@@ -1,5 +1,6 @@
+#import required liberaries
 import numpy as np
-import matplotlib.pyplot as pt
+import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 
@@ -16,15 +17,18 @@ clf.fit(xtrain, train_label)
 xtest = data[21000: , 1: ]
 actual_label = data[21000: , 0]
 
-d = xtest[8]
-d.shape = (28, 28)
-pt.imshow(255-d, cmap='gray')
+# take random test and check if it is working
+data = xtest[8]
+data.shape = (28, 28)  # change row vector to 28 x 28 mtrx 
+plt.imshow(255-data, cmap='gray')  # make background white, 255-data
 print(clf.predict( [xtest[8]] ))
 p = clf.predict(xtest)
 
+
+# calculate accuracy
 count = 0
 for i in range(0, 21000):
     count += 1 if p[i] == actual_label[i] else 0
 print("accuracy : ", (count / 21000) * 100)
 
-pt.show()
+plt.show()
